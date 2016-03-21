@@ -18,18 +18,27 @@ public class Base {
 		Connection connection = null;
 		Statement st = null;
 		ResultSet rs = null;
-		
+		//注册驱动
 		try {
-			//注册驱动
+			//第一种注册驱动的方法
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			//第二种注册驱动的方法
+//			System.setProperty("jdbc.drivers", "com.mysql.jdbc.Driver");
+			//第三种注册驱动的方法（推荐使用方式）
+//			Class.forName("com.mysql.jdbc.Driver");
+			
 			System.out.println("数据库驱动管理创建成功");
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("数据库驱动管理创建失败");
 		}
 		
 		//建立连接
 		try {
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/zjjdbc", "root", "");
+			String url = "jdbc:mysql://localhost:3306/zjjdbc";
+			String user = "root";
+			String password = "";
+			
+			connection = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
 			System.out.println("建立数据库连接失败");
 		}

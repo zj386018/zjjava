@@ -18,7 +18,7 @@ public class Base {
 		Connection connection = null;
 		Statement st = null;
 		ResultSet rs = null;
-		//注册驱动
+		//注册驱动//DriverManager里面有许多数据库的驱动列表
 		try {
 			//第一种注册驱动的方法
 			DriverManager.registerDriver(new com.mysql.jdbc.Driver());

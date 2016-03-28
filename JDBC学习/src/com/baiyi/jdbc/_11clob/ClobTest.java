@@ -21,8 +21,8 @@ public class ClobTest {
 
 	public static void main(String[] args) {
 
-//		insert();
-		read(1);
+		insert();
+//		read(1);
 	}
 
 	static void read(int id) {
@@ -63,6 +63,10 @@ public class ClobTest {
 		// 处理结果
 		try {
 			while (resultSet.next()) {
+				
+				//直接读取为String 类型
+//				String string = resultSet.getString("bigtxt");
+				//另外一种方法
 				File file = new File("第一章");
 				Clob clob = resultSet.getClob("bigtxt");
 				reader = clob.getCharacterStream();
@@ -114,8 +118,15 @@ public class ClobTest {
 			pStatement = connection.prepareStatement(sql);
 			File file = new File("src/com/baiyi/jdbc/_11clob/第四章.txt");
 			reader = new BufferedReader(new FileReader(file));
+			//第一种方法采用将reader直接放入到数据库语句中
 			pStatement.setCharacterStream(1, reader, file.length());// 字符流
 			// pStatement.setAsciiStream(1, x, length)//ascii 字节流
+			
+			
+			//另外一种方法采用将reader放入到一个String中，然后再放入到数据库语句中
+//			String string = reader.toString();
+//			pStatement.setString(1, string);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("创建数据库语句失败");
